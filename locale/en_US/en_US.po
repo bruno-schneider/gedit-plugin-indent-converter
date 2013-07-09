@@ -1,0 +1,31 @@
+# Indent Converter (Gedit plugin).
+# Copyright (C) 2013 Bruno de Oliveira Schneider
+# This file is distributed under the same license as the Indent Converter package.
+# Bruno Schneider <boschneider@gmail.com>, 2013.
+#
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-07-09 13:32-0300\n"
+"PO-Revision-Date: 2013-07-09 13:40-0300\n"
+"Last-Translator: Bruno Schneider <boschneider@gmail.com>\n"
+"Language-Team: English\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: indent-converter.py:51
+msgid "Convert Tabs"
+msgstr "Convert Tabs"
+
+#: indent-converter.py:52 indent-converter.py:53
+msgid "Convert spaces to tabs"
+msgstr "Convert spaces to tabs"
+
+#: indent-converter.py:54 indent-converter.py:55
+msgid "Convert tabs to spaces"
+msgstr "Convert tabs to spaces"

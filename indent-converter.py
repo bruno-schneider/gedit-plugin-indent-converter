@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 from gi.repository import GObject, Gedit, Gtk, Gio
-from gettext import gettext as _
+import gettext
 import re
+import os
 
+GETTEXT_DOMAIN="messages"
 
 UI_XML = """<ui>
     <menubar name='MenuBar'>
@@ -26,6 +28,9 @@ class IndentConverterPlugin(GObject.Object, Gedit.WindowActivatable):
 
     def __init__(self):
         GObject.Object.__init__(self)
+        locale_path = os.path.join(os.path.dirname(__file__), 'locale')
+        # first argument (DOMAIN) is also used as the name of .mo files
+        gettext.install(GETTEXT_DOMAIN, locale_path)
 
     def do_activate(self):
         self.insert_menu()
@@ -118,3 +123,4 @@ class IndentConverterPlugin(GObject.Object, Gedit.WindowActivatable):
         doc.begin_user_action()
         doc.set_text(text)
         doc.end_user_action()
+

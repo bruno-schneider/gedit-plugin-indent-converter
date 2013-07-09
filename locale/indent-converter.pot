@@ -1,0 +1,30 @@
+# Indent Converter message catalog.
+# Copyright (C) 2013 Bruno Schneider
+# This file is distributed under the same license as the "Indent Converter" package.
+# Bruno Schneider <boschneider@gmail.com>, 2013.
+#
+
+msgid ""
+msgstr ""
+"Project-Id-Version: Indent Converter (gedit plugin) 0.1\n"
+"Report-Msgid-Bugs-To: boschneider@gmail.com\n"
+"POT-Creation-Date: 2013-07-09 17:01-0300\n"
+"PO-Revision-Date: 2013-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <boschneider@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: indent-converter.py:54
+msgid "Convert Tabs"
+msgstr ""
+
+#: indent-converter.py:55 indent-converter.py:56
+msgid "Convert spaces to tabs"
+msgstr ""
+
+#: indent-converter.py:57 indent-converter.py:58
+msgid "Convert tabs to spaces"
+msgstr ""
