@@ -4,7 +4,7 @@ import gettext
 import re
 import os
 
-GETTEXT_DOMAIN="messages"
+GETTEXT_DOMAIN = "messages"
 
 UI_XML = """<ui>
     <menubar name='MenuBar'>
@@ -13,6 +13,7 @@ UI_XML = """<ui>
                 <menu action='TabConvert'>
                     <menuitem action='SpacesToTabs'/>
                     <menuitem action='TabsToSpaces'/>
+                    <menuitem action='RemoveWhitespaces'/>
                 </menu>
             </placeholder>
         </menu>
@@ -56,6 +57,8 @@ class IndentConverterPlugin(GObject.Object, Gedit.WindowActivatable):
                 None, _('Convert spaces to tabs'), self.do_spaces_to_tabs),
             ('TabsToSpaces', Gtk.STOCK_INDENT, _('Convert tabs to spaces'),
                 None, _('Convert tabs to spaces'), self.do_tabs_to_spaces),
+            ('RemoveWhitespaces', Gtk.STOCK_INDENT, _('Remove whitespaces'),
+                None, _('Remove whitespaces'), self.do_remove_trailing_whitespaces),
         ])
         manager.insert_action_group(self.action_group, -1)
         self.ui_id = manager.add_ui_from_string(UI_XML)
@@ -68,7 +71,7 @@ class IndentConverterPlugin(GObject.Object, Gedit.WindowActivatable):
 
     def guess_tab_size(self, text):
         def gcd(a, b):
-            return a if b == 0 else gcd(b, a % b);
+            return a if b == 0 else gcd(b, a % b)
 
         r = re.compile('^ +', re.MULTILINE)
         matches = r.findall(text)
@@ -83,8 +86,7 @@ class IndentConverterPlugin(GObject.Object, Gedit.WindowActivatable):
                 freq[spaces] = 1
 
         # sort frequencies by value:
-        items = [ [i[1], i[0]] for i in freq.items() ]
-        items.sort()
+        items = sorted([[i[1], i[0]] for i in freq.items()])
         items.reverse()
         items = [i[1] for i in items]
 
@@ -103,7 +105,7 @@ class IndentConverterPlugin(GObject.Object, Gedit.WindowActivatable):
         tab_size = self.guess_tab_size(text)
         if (tab_size < 2):
             tab_size = self.tab_size()
-        r = re.compile('^(?:' +  (' ' * tab_size) + ')+', re.MULTILINE)
+        r = re.compile('^(?:' + (' ' * tab_size) + ')+', re.MULTILINE)
 
         def replacer(match):
             return '\t' * (len(match.group(0)) / tab_size)
@@ -124,3 +126,11 @@ class IndentConverterPlugin(GObject.Object, Gedit.WindowActivatable):
         doc.set_text(text)
         doc.end_user_action()
 
+    def do_remove_trailing_whitespaces(self, action):
+        doc = self.window.get_active_document()
+        start, end = doc.get_bounds()
+        text = doc.get_text(start, end, True)
+        text = re.sub(r'[ \t\r\v\f]+\n', '\n', text)
+        doc.begin_user_action()
+        doc.set_text(text)
+        doc.end_user_action()
