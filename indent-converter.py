@@ -108,7 +108,7 @@ class IndentConverterPlugin(GObject.Object, Gedit.WindowActivatable):
         r = re.compile('^(?:' + (' ' * tab_size) + ')+', re.MULTILINE)
 
         def replacer(match):
-            return '\t' * (len(match.group(0)) / tab_size)
+            return '\t' * int(len(match.group(0)) / tab_size)
 
         text = r.sub(replacer, text)
 
